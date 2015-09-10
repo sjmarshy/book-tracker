@@ -23,15 +23,50 @@ We're going to be starting pretty simple, with the ability to add titles.
 Our state is going to need to track the books we have, so we'll start with
 that.
 
---- The App State
+--- core.cljs +=
 
 (defonce app-state (atom {:books [
-                    {:title "Test Book"}]}))
+                    {:title "Test Book"}
+                    {:title "Test Book2"}
+                    {:title "Test Book3"}
+                    {:title "Test Book4"}]}))
+---
+
+@s Add Book
+
+So we're obviously going to need to add books at some point, we're going to do
+this by MUTATING STATE. YAAAAAY PRAGMATISM.
+
+--- core.cljs +=
+
+(defn add-book [app title]
+ (om/transact! app :books #(conj (:books app) {:title title})))
+
+---
+
+@s Books components
+
+We'll keep this simple for now, we'll just have a nice list of book titles
+
+--- core.cljs +=
+
+(defn book-title [book]
+  (dom/li nil (:title book)))
+
+(defn book-titles [books]
+  (apply dom/ul nil
+    (map book-title books)))
+
+(defn add-book-form [app]
+  (dom/div nil
+    (dom/input #js{:type "input"})
+    (dom/button #js{:onClick #(.log js/console "hi")} "add book")))
+
 ---
 
 @s main
 
---- Main Function
+--- core.cljs +=
 (defn main []
   (.log js/console "hi")
   (om/root
@@ -39,7 +74,9 @@ that.
       (reify
         om/IRender
         (render [_]
-          (dom/h1 nil (:text app)))))
+          (dom/div nil
+          (add-book-form app)
+          (book-titles  (:books app))))))
     app-state
     {:target (. js/document (getElementById "app"))}))
 ---

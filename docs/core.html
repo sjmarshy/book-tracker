@@ -257,6 +257,7 @@ We're going to be building a book tracker.</p>
 (enable-console-print!)
 
 </pre>
+<p class="seealso">See also sections <a href="#2">2</a>, <a href="#3">3</a>, <a href="#4">4</a> and <a href="#5">5</a>.</p>
 </div>
 <div class="section">
 
@@ -273,29 +274,83 @@ that.</p>
 
 
 <div class="codeblock">
-<p class="notp"><span class="codeblock_name">{The App State <a href="#2">2</a>} ≡</span></p>
+<p class="notp"><span class="codeblock_name"><b>{core.cljs <a href="#1">1</a>} +≡</b></span></p>
 <pre class="prettyprint lang-clojure">
 
 (defonce app-state (atom {:books [
-                    {:title "Test Book"}]}))
+                    {:title "Test Book"}
+                    {:title "Test Book2"}
+                    {:title "Test Book3"}
+                    {:title "Test Book4"}]}))
 </pre>
+<p class="seealso">See also sections <a href="#3">3</a>, <a href="#4">4</a>, <a href="#5">5</a>.</p>
 </div>
 </div><div class="section">
 
 
 
 
-<p class="notp" id="3"></p><h4 >3. main</h4>
+<p class="notp" id="3"></p><h4 >3. Add Book</h4>
+
+
+<p>So we're obviously going to need to add books at some point, we're going to do
+this by MUTATING STATE. YAAAAAY PRAGMATISM.</p>
+
+
+
+<div class="codeblock">
+<p class="notp"><span class="codeblock_name"><b>{core.cljs <a href="#1">1</a>} +≡</b></span></p>
+<pre class="prettyprint lang-clojure">
+
+(defn add-book [app title]
+ (om/transact! app :books #(conj (:books app) {:title title})))
+
+</pre>
+<p class="seealso">See also sections <a href="#2">2</a>, <a href="#4">4</a>, <a href="#5">5</a>.</p>
+</div>
+</div><div class="section">
 
 
 
 
+<p class="notp" id="4"></p><h4 >4. Books components</h4>
+
+
+<p>We'll keep this simple for now, we'll just have a nice list of book titles</p>
+
+
+
+<div class="codeblock">
+<p class="notp"><span class="codeblock_name"><b>{core.cljs <a href="#1">1</a>} +≡</b></span></p>
+<pre class="prettyprint lang-clojure">
+
+(defn book-title [book]
+  (dom/li nil (:title book)))
+
+(defn book-titles [books]
+  (apply dom/ul nil
+    (map book-title books)))
+
+(defn add-book-form [app]
+  (dom/div nil
+    (dom/input #js{:type "input"})
+    (dom/button #js{:onClick #(.log js/console "hi")} "add book")))
+
+</pre>
+<p class="seealso">See also sections <a href="#2">2</a>, <a href="#3">3</a>, <a href="#5">5</a>.</p>
+</div>
+</div><div class="section">
+
+
+
+
+<p class="notp" id="5"></p><h4 >5. main</h4>
 
 
 
 
 <div class="codeblock">
-<p class="notp"><span class="codeblock_name">{Main Function <a href="#3">3</a>} ≡</span></p>
+<p class="notp"><span class="codeblock_name"><b>{core.cljs <a href="#1">1</a>} +≡</b></span></p>
 <pre class="prettyprint lang-clojure">
 (defn main []
   (.log js/console "hi")
@@ -304,10 +359,13 @@ that.</p>
       (reify
         om/IRender
         (render [_]
-          (dom/h1 nil (:text app)))))
+          (dom/div nil
+          (add-book-form app)
+          (book-titles  (:books app))))))
     app-state
     {:target (. js/document (getElementById "app"))}))
 </pre>
+<p class="seealso">See also sections <a href="#2">2</a>, <a href="#3">3</a>, <a href="#4">4</a>.</p>
 </div>
 
 
@@ -317,8 +375,6 @@ that.</p>
 </div><h3>Index</h3>
 <h5>Code Blocks</h5>
 <ul class="two-col">
-<li><code>Main Function</code> <a href="#3">3</a></li>
-<li><code>The App State</code> <a href="#2">2</a></li>
-<li><code>core.cljs</code> <a href="#1">1</a></li>
+<li><code>core.cljs</code> <a href="#1">1</a>, <a href="#2">2</a>, <a href="#3">3</a>, <a href="#4">4</a>, <a href="#5">5</a></li>
 </ul></body>
 </html>
