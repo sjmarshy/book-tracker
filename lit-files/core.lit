@@ -3,6 +3,10 @@
 @title Core
 
 @s
+ 
+We're going to be building a book tracker.
+
+We're going to be starting pretty simple, with the ability to add titles.
 
 --- core.cljs
 (ns book-tracker.core
@@ -11,9 +15,25 @@
 
 (enable-console-print!)
 
-(defonce app-state (atom {:text "Hello Chestnut!"}))
+---
 
+@s App State
+
+
+Our state is going to need to track the books we have, so we'll start with
+that.
+
+--- The App State
+
+(defonce app-state (atom {:books [
+                    {:title "Test Book"}]}))
+---
+
+@s main
+
+--- Main Function
 (defn main []
+  (.log js/console "hi")
   (om/root
     (fn [app owner]
       (reify

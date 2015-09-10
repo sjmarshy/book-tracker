@@ -1,0 +1,324 @@
+<!doctype html>
+                   <html>
+                   <head>
+                   <meta charset="utf-8">
+                   <title> Core </title>
+                   <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=clojure"></script>
+    <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+                 <script type="text/x-mathjax-config"> MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]}}); </script>
+                   <style>
+                   body {
+    margin-left: 4em;
+    margin-right: 4em;
+    font-size: 14pt;
+}
+.section {
+    page-break-inside: avoid;
+}
+.codeblock {
+    padding-bottom: 15px;
+}
+pre.prettyprint {
+    font-family: Monaco, "Lucida Console", monospace;
+    font-size: 11pt;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: #f1f1f1;
+    white-space: pre-wrap;
+}
+.seealso {
+    font-size: 11pt;
+}
+.codeblock_name {
+    font-family: Monaco, "Lucida Console", monospace;
+    font-size: 11pt;
+    margin-top: 1.25em;
+    display: block;
+}
+a:link {
+    color: blue;
+    text-decoration: none;
+}
+a:link:hover {
+    color: blue;
+    text-decoration: underline;
+}
+a:visited {
+    color: blue;
+}
+a:link:active {
+    color: red;
+}
+h4 {
+    padding-right: 1.25em;
+}
+h4.noheading {
+    margin-bottom: 0px;
+}
+h1 {
+    text-align: center;
+}
+code {
+    font-family: Monaco, "Lucida Console", monospace;
+    font-size: 11pt;
+    padding: 2px;
+}
+pre {
+    -moz-tab-size: 4; /* Code for Firefox */
+    -o-tab-size: 4; /* Code for Opera 10.6-12.1 */
+    tab-size: 4;
+}
+p:not(.notp) {
+    margin: 0;
+    text-indent: 2em;
+}
+/* .two-col li { */
+/*     display: inline-block; */
+/*     width: 50%; */
+/*     margin: 0; */
+/*     padding: 0; */
+/*     vertical-align: top; */
+/* } */
+.two-col {
+    list-style-type: none;
+}
+.two-col li:before {
+    content: '-';
+    padding: 5px;
+    margin-right: 5px;
+    color: orange;
+    background-color: white;
+    display: inline-block;
+}/* Tomorrow Theme */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+.prettyprint {
+    background: white;
+    font-family: Monaco, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    border: none;
+    padding: 10px;
+    margin-left: 1.5em;
+}
+
+.pln {
+    color: #4d4d4c;
+}
+
+@media screen {
+    .str {
+        color: #718c00;
+    }
+
+    .kwd {
+        color: #8959a8;
+    }
+
+    .com {
+        color: #800;
+    }
+
+    .typ {
+        color: #4271ae;
+    }
+
+    .lit {
+        color: #f5871f;
+    }
+
+    .pun {
+        color: #4d4d4c;
+    }
+
+    .opn {
+        color: #4d4d4c;
+    }
+
+    .clo {
+        color: #4d4d4c;
+    }
+
+    .tag {
+        color: #c82829;
+    }
+
+    .atn {
+        color: #f5871f;
+    }
+
+    .atv {
+        color: #3e999f;
+    }
+
+    .dec {
+        color: #f5871f;
+    }
+
+    .var {
+        color: #c82829;
+    }
+
+    .fun {
+        color: #4271ae;
+    }
+}
+@media print, projection {
+    .str {
+        color: #006600;
+    }
+
+    .kwd {
+        color: #006;
+        font-weight: bold;
+    }
+
+    .com {
+        color: #600;
+        font-style: italic;
+    }
+
+    .typ {
+        color: #404;
+        font-weight: bold;
+    }
+
+    .lit {
+        color: #004444;
+    }
+
+    .pun, .opn, .clo {
+        color: #444400;
+    }
+
+    .tag {
+        color: #006;
+        font-weight: bold;
+    }
+
+    .atn {
+        color: #440044;
+    }
+
+    .atv {
+        color: #006600;
+    }
+}
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* IE indents via margin-left */
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L4,
+li.L5,
+li.L6,
+li.L7,
+li.L8,
+li.L9 {
+    /* */
+}
+
+/* Alternate shading for lines */
+li.L1,
+li.L3,
+li.L5,
+li.L7,
+li.L9 {
+    /* */
+}                   </style>
+                   </head>
+                   <body><h1>Core</h1>
+
+
+
+
+<p class="notp" id="1"></p><h4 class="noheading">1. </h4>
+
+<p> 
+We're going to be building a book tracker.</p>
+
+<p>We're going to be starting pretty simple, with the ability to add titles.</p>
+
+
+
+<div class="codeblock">
+<p class="notp"><span class="codeblock_name"><b>{core.cljs <a href="#1">1</a>} ≡</b></span></p>
+<pre class="prettyprint lang-clojure">
+(ns book-tracker.core
+  (:require [om.core :as om :include-macros true]
+            [om.dom :as dom :include-macros true]))
+
+(enable-console-print!)
+
+</pre>
+</div>
+<div class="section">
+
+
+
+
+<p class="notp" id="2"></p><h4 >2. App State</h4>
+
+
+
+<p>Our state is going to need to track the books we have, so we'll start with
+that.</p>
+
+
+
+<div class="codeblock">
+<p class="notp"><span class="codeblock_name">{The App State <a href="#2">2</a>} ≡</span></p>
+<pre class="prettyprint lang-clojure">
+
+(defonce app-state (atom {:books [
+                    {:title "Test Book"}]}))
+</pre>
+</div>
+</div><div class="section">
+
+
+
+
+<p class="notp" id="3"></p><h4 >3. main</h4>
+
+
+
+
+
+
+
+
+<div class="codeblock">
+<p class="notp"><span class="codeblock_name">{Main Function <a href="#3">3</a>} ≡</span></p>
+<pre class="prettyprint lang-clojure">
+(defn main []
+  (.log js/console "hi")
+  (om/root
+    (fn [app owner]
+      (reify
+        om/IRender
+        (render [_]
+          (dom/h1 nil (:text app)))))
+    app-state
+    {:target (. js/document (getElementById "app"))}))
+</pre>
+</div>
+
+
+
+
+
+</div><h3>Index</h3>
+<h5>Code Blocks</h5>
+<ul class="two-col">
+<li><code>Main Function</code> <a href="#3">3</a></li>
+<li><code>The App State</code> <a href="#2">2</a></li>
+<li><code>core.cljs</code> <a href="#1">1</a></li>
+</ul></body>
+</html>
