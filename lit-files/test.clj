@@ -1,2 +1,0 @@
-(ns book-tracker.test)
-

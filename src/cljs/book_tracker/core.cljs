@@ -25,21 +25,35 @@
   (apply dom/ul nil
     (map book-title books)))
 
-(defn add-book-form [app]
-  (dom/div nil
-    (dom/input #js{:type "input"})
-    (dom/button #js{:onClick #(.log js/console "hi")} "add book")))
+
+(defn handle-book-form [e owner]
+  (om/set-state! owner :title (.. e -target -value)))
+
+(defn add-book-form [data owner]
+ (reify
+
+  om/IInitState
+  (init-state [_]
+    {:title ""})
+  
+  om/IRenderState
+  (render-state [_ state]
+   (dom/div nil
+    (dom/input 
+      #js{:type "input" 
+          :value (:title state) 
+          :onChange #(handle-book-form % owner)})
+    (dom/button #js{:onClick #(add-book data (:title state))} "add book")))))
 
 
 (defn main []
-  (.log js/console "hi")
   (om/root
     (fn [app owner]
       (reify
         om/IRender
         (render [_]
           (dom/div nil
-          (add-book-form app)
+          (om/build add-book-form app)
           (book-titles  (:books app))))))
     app-state
     {:target (. js/document (getElementById "app"))}))
