@@ -1,15 +1,27 @@
 (ns book-tracker.book.components
+  (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]
+            [cljs.core.async :refer [put!]]
             [book-tracker.appstate :as s]))
 
 ;; book components
-(defn book-title [book]
-  (dom/li nil (:title book)))
+(defn book [{:keys [del book]} owner]
+  (reify
+    om/IRender
+    (render [_]
+      (dom/li nil 
+              (:title book)
+              (dom/button #js 
+                          {:style #js {:marginLeft "10px"}
+                           :onClick (fn [e] (put! del book))}
+                          "Delete")))))
 
-(defn book-titles [books]
+(defn books [{:keys [books del]}]
   (apply dom/ul nil
-         (map book-title books)))
+         (om/build-all book
+                       (map (fn [x] {:del del
+                                     :book x}) books))))
 
 ;; book form
 (defn handle-book-form [e owner]
