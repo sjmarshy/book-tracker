@@ -8,6 +8,7 @@ goog.require('om.core');
 book_tracker.book.components.text_color = "#e4f1fe";
 book_tracker.book.components.font_size = "18px";
 book_tracker.book.components.book_styles = {"color": book_tracker.book.components.text_color, "width": "100vw", "borderBottom": "1px solid #2c3e50", "justifyContent": "space-between", "padding": "0 0 0 15px", "display": "flex", "listStyle": "none", "backgroundColor": "#22313f", "height": "100px", "alignItems": "center", "clear": "both"};
+book_tracker.book.components.neutral_button_styles = new cljs.core.PersistentArrayMap(null, 3, [cljs.core.constant$keyword$_COLON_border,"none",cljs.core.constant$keyword$_COLON_backgroundColor,"transparent",cljs.core.constant$keyword$_COLON_cursor,"pointer"], null);
 book_tracker.book.components.book_button_styles = {"height": "100px", "backgroundColor": "#19B5FE", "border": "none", "fontSize": book_tracker.book.components.font_size, "padding": "5px", "cursor": "pointer", "width": "100px", "color": book_tracker.book.components.text_color, "marginLeft": "10px"};
 book_tracker.book.components.book_title_styles = {"fontFamily": "sans-serif", "fontSize": book_tracker.book.components.font_size, "display": "inline-block"};
 book_tracker.book.components.book = (function book_tracker$book$components$book(p__10929,owner){
@@ -113,102 +114,108 @@ return om.core.set_state_BANG_.cljs$core$IFn$_invoke$arity$3(owner,cljs.core.con
 });
 book_tracker.book.components.add_book_button_styles = {"color": book_tracker.book.components.text_color, "width": "100vw", "cursor": "pointer", "fontFamily": "sans-serif", "justifyContent": "center", "display": "flex", "fontSize": book_tracker.book.components.font_size, "backgroundColor": "#2ecc71", "height": "50px", "alignItems": "center"};
 book_tracker.book.components.add_book_form = (function book_tracker$book$components$add_book_form(data,owner){
-if(typeof book_tracker.book.components.t10973 !== 'undefined'){
+if(typeof book_tracker.book.components.t10977 !== 'undefined'){
 } else {
 
 /**
 * @constructor
 */
-book_tracker.book.components.t10973 = (function (owner,data,add_book_form,meta10974){
+book_tracker.book.components.t10977 = (function (owner,data,add_book_form,meta10978){
 this.owner = owner;
 this.data = data;
 this.add_book_form = add_book_form;
-this.meta10974 = meta10974;
+this.meta10978 = meta10978;
 this.cljs$lang$protocol_mask$partition1$ = 0;
 this.cljs$lang$protocol_mask$partition0$ = 393216;
 })
-book_tracker.book.components.t10973.prototype.om$core$IRenderState$ = true;
+book_tracker.book.components.t10977.prototype.om$core$IRenderState$ = true;
 
-book_tracker.book.components.t10973.prototype.om$core$IRenderState$render_state$arity$2 = (function (_,state){
+book_tracker.book.components.t10977.prototype.om$core$IRenderState$render_state$arity$2 = (function (_,state){
 var self__ = this;
 var ___$1 = this;
 var display = cljs.core.constant$keyword$_COLON_display.cljs$core$IFn$_invoke$arity$1(state);
 if(cljs.core.truth_(display)){
-var G__10976 = {"style": {"padding": "5px"}};
-var G__10977 = (function (){var G__10981 = {"onClick": ((function (G__10976,display,___$1){
-return (function (){
-return book_tracker.book.components.toggle_display_book_form(self__.owner,state);
-});})(G__10976,display,___$1))
-};
-var G__10982 = "x";
-return React.DOM.button(G__10981,G__10982);
-})();
-var G__10978 = (function (){var G__10983 = null;
+var G__10980 = {"style": {"fontSize": book_tracker.book.components.font_size, "flexDirection": "column", "display": "flex", "backgroundColor": "#ecf0f1", "fontWeight": (200), "fontFamily": "sans-serif", "color": "#3498db", "padding": "0 0 0 5px"}};
+var G__10981 = (function (){var G__10983 = {"style": {"margin": (0), "padding": "10px 0 0 0", "textAlign": "center"}};
 var G__10984 = "Add Books";
 return React.DOM.h4(G__10983,G__10984);
 })();
-var G__10979 = (function (){var G__10985 = {"onChange": ((function (G__10976,G__10977,G__10978,display,___$1){
+var G__10982 = (function (){var G__10985 = {"style": {"padding-bottom": "10px", "padding-right": "50px", "justifyContent": "space-between", "display": "flex"}};
+var G__10986 = (function (){var G__10988 = {"onClick": ((function (G__10985,G__10980,G__10981,display,___$1){
+return (function (){
+return book_tracker.book.components.toggle_display_book_form(self__.owner,state);
+});})(G__10985,G__10980,G__10981,display,___$1))
+, "style": cljs.core.clj__GT_js(cljs.core.assoc.cljs$core$IFn$_invoke$arity$variadic(book_tracker.book.components.neutral_button_styles,cljs.core.constant$keyword$_COLON_flexBasis,"10%",cljs.core.array_seq([cljs.core.constant$keyword$_COLON_color,"red"], 0)))};
+var G__10989 = "x";
+return React.DOM.button(G__10988,G__10989);
+})();
+var G__10987 = (function (){var G__10990 = null;
+var G__10991 = (function (){var G__10993 = {"onChange": ((function (G__10990,G__10985,G__10986,G__10980,G__10981,display,___$1){
 return (function (p1__10955_SHARP_){
 return book_tracker.book.components.handle_book_form(p1__10955_SHARP_,self__.owner);
-});})(G__10976,G__10977,G__10978,display,___$1))
+});})(G__10990,G__10985,G__10986,G__10980,G__10981,display,___$1))
 , "value": cljs.core.constant$keyword$_COLON_title.cljs$core$IFn$_invoke$arity$1(state), "style": {"marginRight": "5px"}, "type": "input"};
-return (om.dom.input.cljs$core$IFn$_invoke$arity$1 ? om.dom.input.cljs$core$IFn$_invoke$arity$1(G__10985) : om.dom.input.call(null,G__10985));
+return (om.dom.input.cljs$core$IFn$_invoke$arity$1 ? om.dom.input.cljs$core$IFn$_invoke$arity$1(G__10993) : om.dom.input.call(null,G__10993));
 })();
-var G__10980 = (function (){var G__10986 = {"onClick": ((function (G__10976,G__10977,G__10978,G__10979,display,___$1){
+var G__10992 = (function (){var G__10994 = {"onClick": ((function (G__10990,G__10991,G__10985,G__10986,G__10980,G__10981,display,___$1){
 return (function (){
 book_tracker.appstate.add_book(self__.data,cljs.core.constant$keyword$_COLON_title.cljs$core$IFn$_invoke$arity$1(state));
 
 return book_tracker.book.components.clear_book_form(self__.owner);
-});})(G__10976,G__10977,G__10978,G__10979,display,___$1))
+});})(G__10990,G__10991,G__10985,G__10986,G__10980,G__10981,display,___$1))
 };
-var G__10987 = "add book";
-return React.DOM.button(G__10986,G__10987);
+var G__10995 = "add book";
+return React.DOM.button(G__10994,G__10995);
 })();
-return React.DOM.div(G__10976,G__10977,G__10978,G__10979,G__10980);
+return React.DOM.div(G__10990,G__10991,G__10992);
+})();
+return React.DOM.div(G__10985,G__10986,G__10987);
+})();
+return React.DOM.div(G__10980,G__10981,G__10982);
 } else {
-var G__10988 = {"onClick": ((function (display,___$1){
+var G__10996 = {"onClick": ((function (display,___$1){
 return (function (){
 return book_tracker.book.components.toggle_display_book_form(self__.owner,state);
 });})(display,___$1))
 , "style": book_tracker.book.components.add_book_button_styles};
-var G__10989 = "Add Book";
-return React.DOM.div(G__10988,G__10989);
+var G__10997 = "Add Book";
+return React.DOM.div(G__10996,G__10997);
 }
 });
 
-book_tracker.book.components.t10973.prototype.om$core$IInitState$ = true;
+book_tracker.book.components.t10977.prototype.om$core$IInitState$ = true;
 
-book_tracker.book.components.t10973.prototype.om$core$IInitState$init_state$arity$1 = (function (_){
+book_tracker.book.components.t10977.prototype.om$core$IInitState$init_state$arity$1 = (function (_){
 var self__ = this;
 var ___$1 = this;
-return new cljs.core.PersistentArrayMap(null, 2, [cljs.core.constant$keyword$_COLON_title,"",cljs.core.constant$keyword$_COLON_display,false], null);
+return new cljs.core.PersistentArrayMap(null, 2, [cljs.core.constant$keyword$_COLON_title,"",cljs.core.constant$keyword$_COLON_display,true], null);
 });
 
-book_tracker.book.components.t10973.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_10975){
+book_tracker.book.components.t10977.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_10979){
 var self__ = this;
-var _10975__$1 = this;
-return self__.meta10974;
+var _10979__$1 = this;
+return self__.meta10978;
 });
 
-book_tracker.book.components.t10973.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_10975,meta10974__$1){
+book_tracker.book.components.t10977.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_10979,meta10978__$1){
 var self__ = this;
-var _10975__$1 = this;
-return (new book_tracker.book.components.t10973(self__.owner,self__.data,self__.add_book_form,meta10974__$1));
+var _10979__$1 = this;
+return (new book_tracker.book.components.t10977(self__.owner,self__.data,self__.add_book_form,meta10978__$1));
 });
 
-book_tracker.book.components.t10973.cljs$lang$type = true;
+book_tracker.book.components.t10977.cljs$lang$type = true;
 
-book_tracker.book.components.t10973.cljs$lang$ctorStr = "book-tracker.book.components/t10973";
+book_tracker.book.components.t10977.cljs$lang$ctorStr = "book-tracker.book.components/t10977";
 
-book_tracker.book.components.t10973.cljs$lang$ctorPrWriter = (function (this__4663__auto__,writer__4664__auto__,opt__4665__auto__){
-return cljs.core._write(writer__4664__auto__,"book-tracker.book.components/t10973");
+book_tracker.book.components.t10977.cljs$lang$ctorPrWriter = (function (this__4663__auto__,writer__4664__auto__,opt__4665__auto__){
+return cljs.core._write(writer__4664__auto__,"book-tracker.book.components/t10977");
 });
 
-book_tracker.book.components.__GT_t10973 = (function book_tracker$book$components$add_book_form_$___GT_t10973(owner__$1,data__$1,add_book_form__$1,meta10974){
-return (new book_tracker.book.components.t10973(owner__$1,data__$1,add_book_form__$1,meta10974));
+book_tracker.book.components.__GT_t10977 = (function book_tracker$book$components$add_book_form_$___GT_t10977(owner__$1,data__$1,add_book_form__$1,meta10978){
+return (new book_tracker.book.components.t10977(owner__$1,data__$1,add_book_form__$1,meta10978));
 });
 
 }
 
-return (new book_tracker.book.components.t10973(owner,data,book_tracker$book$components$add_book_form,cljs.core.PersistentArrayMap.EMPTY));
+return (new book_tracker.book.components.t10977(owner,data,book_tracker$book$components$add_book_form,cljs.core.PersistentArrayMap.EMPTY));
 });
