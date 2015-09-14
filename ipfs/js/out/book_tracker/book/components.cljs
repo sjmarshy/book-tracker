@@ -20,10 +20,6 @@
                       :color text-color
                       :padding "0 0 0 15px"})
 
-(def neutral-button-styles {:border "none"
-                            :backgroundColor "transparent"
-                            :cursor "pointer"})
-
 (def book-button-styles #js {;aesthetics 
                              :border "none"
                              :backgroundColor "#19B5FE"
@@ -94,40 +90,24 @@
     om/IInitState
     (init-state [_]
       {:title ""
-       :display true})
+       :display false})
 
     om/IRenderState
     (render-state [_ state]
       (let [display (:display state)]
         (if display
-          (dom/div #js {:style #js {:padding "0 0 0 5px"
-                                    :color "#3498db"
-                                    :fontFamily "sans-serif"
-                                    :fontWeight 200
-                                    :backgroundColor "#ecf0f1"
-                                    :display "flex"
-                                    :flexDirection "column"
-                                    :fontSize font-size}}
-                   (dom/h4 #js {:style #js {:textAlign "center"
-                                            :padding "10px 0 0 0"
-                                            :margin 0}} "Add Books")
-                   (dom/div #js {:style #js {:display "flex"
-                                             :justifyContent "space-between"
-                                             :padding-right "50px"
-                                             :padding-bottom "10px"}}
-                            (dom/button  #js {:style (clj->js (assoc neutral-button-styles
-                                                                     :flexBasis "10%"
-                                                                     :color "red"))
-                                              :onClick #(toggle-display-book-form owner state)} "x")
-                            (dom/div nil (dom/input 
-                                           #js{:type "input" 
-                                               :style #js {:marginRight "5px"}
-                                               :value (:title state) 
-                                               :onChange #(handle-book-form % owner)})
-                                     (dom/button 
-                                       #js{:onClick (fn []
-                                                      (s/add-book data (:title state))
-                                                      (clear-book-form owner))}
-                                       "add book"))))
+        (dom/div #js {:style #js {:padding "5px"}}
+                 (dom/button  #js {:onClick #(toggle-display-book-form owner state)} "x")
+                 (dom/h4 nil "Add Books")
+                 (dom/input 
+                   #js{:type "input" 
+                       :style #js {:marginRight "5px"}
+                       :value (:title state) 
+                       :onChange #(handle-book-form % owner)})
+                 (dom/button 
+                   #js{:onClick (fn []
+                                  (s/add-book data (:title state))
+                                  (clear-book-form owner))}
+                   "add book"))
           (dom/div #js {:style add-book-button-styles
                         :onClick #(toggle-display-book-form owner state)} "Add Book"))))))
